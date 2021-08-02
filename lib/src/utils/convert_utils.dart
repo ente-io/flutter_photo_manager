@@ -76,6 +76,7 @@ class ConvertUtils {
       latitude: data['lat'],
       longitude: data['lng'],
       mimeType: data['mimeType'],
+      subTypes: data['subTypes'] ?? -1,
     );
 
     return result;

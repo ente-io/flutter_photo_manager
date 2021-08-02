@@ -64,6 +64,7 @@
                             needTitle:(BOOL)needTitle {
     long createDt = (int) asset.creationDate.timeIntervalSince1970;
     long modifiedDt = (int) asset.modificationDate.timeIntervalSince1970;
+    int subTypes = (int) asset.mediaSubtypes;
     
     int typeInt = 0;
     
@@ -87,6 +88,7 @@
         @"lng": @(asset.location.coordinate.longitude),
         @"lat": @(asset.location.coordinate.latitude),
         @"title": needTitle ? [asset title] : @"",
+        @"subTypes": @(subTypes),
     };
 }
 
@@ -104,6 +106,7 @@
         @"lng": @(asset.lng),
         @"lat": @(asset.lat),
         @"title": needTitle ? asset.title : @"",
+        @"subTypes": @(asset.subTypes),
     };
 }
 

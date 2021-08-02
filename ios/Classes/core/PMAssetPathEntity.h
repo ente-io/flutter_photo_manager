@@ -38,6 +38,7 @@
 @property(nonatomic, copy) NSString *title;
 @property(nonatomic, assign) BOOL favorite;
 @property(nonatomic, assign) BOOL isLocallyAvailable;
+@property(nonatomic, assign) int subTypes;
 
 - (instancetype)initWithId:(NSString *)id
                   createDt:(long)createDt

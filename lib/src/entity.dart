@@ -183,6 +183,7 @@ class AssetEntity {
     double? latitude,
     double? longitude,
     this.mimeType,
+    this.subTypes,
   })  : _latitude = latitude,
         _longitude = longitude;
 
@@ -232,6 +233,10 @@ class AssetEntity {
   ///
   /// see [type]
   int typeInt;
+
+  /// Asset SubTypes int value
+  /// In IOS, it corresponds to mediaSubtypes. Default to -1 in Android
+  int? subTypes = -1;
 
   /// Duration of video, unit is second.
   ///
