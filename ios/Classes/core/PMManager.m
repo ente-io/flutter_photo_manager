@@ -367,10 +367,6 @@
     [requestOptions setNetworkAccessAllowed:YES];
     [requestOptions setProgressHandler:^(double progress, NSError *error, BOOL *stop,
                                          NSDictionary *info) {
-        if (progress == 1.0) {
-            [self fetchThumb:asset option:option resultHandler:handler progressHandler:nil];
-        }
-        
         if (error) {
             [self notifyProgress:progressHandler progress:progress state:PMProgressStateFailed];
             [progressHandler deinit];
@@ -591,10 +587,6 @@
     [self notifyProgress:progressHandler progress:0 state:PMProgressStatePrepare];
     [options setProgressHandler:^(double progress, NSError *error, BOOL *stop,
                                   NSDictionary *info) {
-        if (progress == 1.0) {
-            [self fetchFullSizeImageFile:asset resultHandler:handler progressHandler:nil];
-        }
-        
         if (error) {
             [self notifyProgress:progressHandler progress:progress state:PMProgressStateFailed];
             [progressHandler deinit];
@@ -722,12 +714,13 @@
     }
     PHAssetCollection *collection = result[0];
     PHFetchOptions *assetOptions = [self getAssetOptions:type filterOption:filterOption];
-    PHFetchResult<PHAsset *> *fetchResult =
-    [PHAsset fetchAssetsInAssetCollection:collection options:assetOptions];
+    PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:assetOptions];
     
-    return [PMAssetPathEntity entityWithId:id
-                                      name:collection.localizedTitle
-                                assetCount:(int) fetchResult.count];
+    PMAssetPathEntity *entity = [PMAssetPathEntity entityWithId:id
+                                                           name:collection.localizedTitle
+                                                     assetCount:(int) fetchResult.count];
+    entity.isAll = collection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary;
+    return entity;
 }
 
 - (PHFetchOptions *)getAssetOptions:(int)type filterOption:(PMFilterOptionGroup *)optionGroup {
