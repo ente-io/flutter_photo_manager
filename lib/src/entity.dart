@@ -151,23 +151,27 @@ class AssetPathEntity {
     if (other is! AssetPathEntity) {
       return false;
     }
-    return this.id == other.id;
+    return id == other.id &&
+        name == other.name &&
+        assetCount == other.assetCount &&
+        albumType == other.albumType &&
+        type == other.type &&
+        lastModified == other.lastModified &&
+        isAll == other.isAll;
   }
 
   @override
-  int get hashCode {
-    return this.id.hashCode;
-  }
+  int get hashCode =>
+      hashValues(id, name, assetCount, albumType, type, lastModified, isAll);
 
   @override
   String toString() {
-    return "AssetPathEntity{ name: $name, id:$id, length = $assetCount }";
+    return "AssetPathEntity(name: $name, id:$id, assetCount: $assetCount)";
   }
 }
 
-/// Used to describe a picture or video
+/// Used to describe an asset.
 class AssetEntity {
-  /// see [id]
   AssetEntity({
     required this.id,
     required this.typeInt,
@@ -482,20 +486,18 @@ class AssetEntity {
   }
 
   @override
-  int get hashCode {
-    return id.hashCode;
-  }
+  int get hashCode => hashValues(id, isFavorite);
 
   @override
   bool operator ==(other) {
     if (other is! AssetEntity) {
       return false;
     }
-    return this.id == other.id;
+    return id == other.id && isFavorite == other.isFavorite;
   }
 
   @override
-  String toString() => "AssetEntity (id:$id , type: $type)";
+  String toString() => "AssetEntity(id: $id , type: $type)";
 }
 
 /// Longitude and latitude
