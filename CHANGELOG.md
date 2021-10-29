@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 1.3.9+1
+Fixes:
+- Fix compile error on Xcode 12 for iOS 14. (#630)
+
+## 1.3.9
+Fixes:
+- Fix `presentLimited` issues on iOS 14 real devices. (#627)
+
+## 1.3.8
+Improvements:
+- Improve sort orders on all platforms. (#623)
+
+## 1.3.7
+Improvements:
+- Improve sort orders on iOS. (#620)
+
 ## 1.3.6
 Improvements:
 - Prettify file name on iOS. (#615)

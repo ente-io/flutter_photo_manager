@@ -8,12 +8,15 @@
 }
 
 - (NSArray<NSSortDescriptor *> *)sortCond {
+    if (self.sortArray.count == 0) {
+        return nil;
+    }
     return self.sortArray;
 }
 
 - (void)injectSortArray:(NSArray *)array {
     NSMutableArray<NSSortDescriptor *> *result = [NSMutableArray new];
-    
+
     for (NSDictionary *dict in array) {
         int typeValue = [dict[@"type"] intValue];
         BOOL asc = [dict[@"asc"] boolValue];

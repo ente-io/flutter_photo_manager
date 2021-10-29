@@ -8,11 +8,6 @@ import '../type.dart';
 ///
 /// See [FilterOption].
 class FilterOptionGroup {
-  static final _defaultOrderOption = OrderOption(
-    type: OrderOptionType.updateDate,
-    asc: false,
-  );
-
   FilterOptionGroup({
     FilterOption imageOption = const FilterOption(),
     FilterOption videoOption = const FilterOption(),
@@ -21,7 +16,7 @@ class FilterOptionGroup {
     bool containsPathModified = false,
     DateTimeCond? createTimeCond,
     DateTimeCond? updateTimeCond,
-    List<OrderOption> orders = const [],
+    List<OrderOption> orders = const [OrderOption()],
   }) {
     _map[AssetType.image] = imageOption;
     _map[AssetType.video] = videoOption;
@@ -104,13 +99,7 @@ class FilterOptionGroup {
     result['containsPathModified'] = containsPathModified;
     result['createDate'] = createTimeCond.toMap();
     result['updateDate'] = updateTimeCond.toMap();
-
-    final ordersList = List<OrderOption>.of(orders);
-    if (ordersList.isEmpty) {
-      ordersList.add(_defaultOrderOption);
-    }
-
-    result['orders'] = ordersList.map((e) => e.toMap()).toList();
+    result['orders'] = orders.map((e) => e.toMap()).toList();
 
     return result;
   }
